@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 100px auto;
+  padding: 20px 30px;
+  border: 1px solid #00ff00;
+}
+
+.form h2 {
+  margin: 0 auto 20px;
+}
+.input {
+  outline: none;
+}
+
+.task-item {
+  width: 50%;
+  padding: 20px 40px;
+  border: 1px solid #00ff00;
+  margin: 0 auto 30px;
+}
+
+/* .js-is-valid {
+  
+} */
+.form-control {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[type="submit"] {
+  display: block;
+  background-color: #353535;
+  color: #ffffff;
+  border: none;
+  max-width: 140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.form-control span {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  font-size: 14px;
+  color: #ff0000;
+  max-width: 180px;
+  width: 100%;
+}
+
+.js-error input {
+  border: 2px solid #ff0000;
+}
+
+.js-error span {
+  visibility: visible;
+}
+
+.js-success {
+  border: none;
+}
+
+.task-delete-btn {
+  display: block;
+  background-color: #353535;
+  color: #ffffff;
+  border: none;
+  width: 30%;
+  margin: 0 auto;
+  padding: 10px 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
