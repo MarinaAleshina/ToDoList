@@ -49,9 +49,12 @@ form.addEventListener("submit", e => {
   form.reset();
 });
 
-taskContainer.addEventListener("click", onDeletehandler);
+taskContainer.addEventListener("click", e => {
+  const target = e.target;
+  onDeletehandler(target);
+});
 
-function onDeletehandler(e) {
+function onDeletehandler(target) {
   if (e.target.classList.contains("task-delete-btn")) {
     const deleteBtn = e.target;
     const parent = deleteBtn.closest("[data-task-id]");
