@@ -1,6 +1,6 @@
 const regExpProp = {
-  title: /^[a-z0-9]{3,}$/i,
-  body: /^[a-z0-9]{5,}$/i
+  title: /^[a-z0-9 -]{3,}$/i,
+  body: /^[a-z0-9 -\/_*+=.,!?]{5,}$/i
 };
 
 /**

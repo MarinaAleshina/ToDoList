@@ -1,4 +1,4 @@
-import { listItemTemplate } from "../helpers/taskTemplate.js";
+import { listItemTemplate } from "../helpers/taskTemplate";
 import userInterfaceElements from "../config/ui.config";
 
 const { taskContainer } = userInterfaceElements;

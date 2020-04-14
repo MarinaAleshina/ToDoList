@@ -12,11 +12,11 @@ const isDevelopment = process.env.NODE_ENV === "production";
 module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development", // production
-  entry: "./index.js",
+  entry: "./js/index.js",
 
   output: {
     filename: "[name].[hash].js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "./dist/src/js")
   },
 
   resolve: {

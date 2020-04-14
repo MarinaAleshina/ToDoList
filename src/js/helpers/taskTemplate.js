@@ -4,11 +4,12 @@
  * @param {string} objOfTasks._id
  * @param {string} objOfTasks.title
  * @param {string} objOfTasks.body
+ * @param {Boolean} complited
  *
  * @return {HTMLLIElement} li
  */
 
-export function listItemTemplate({ _id, title, body }) {
+export function listItemTemplate({ _id, title, complited, body }) {
   const li = document.createElement("li");
   li.className = "task-item";
   li.setAttribute("data-task-id", _id);
@@ -21,13 +22,25 @@ export function listItemTemplate({ _id, title, body }) {
   p.className = "task-body";
   p.textContent = body;
 
-  const button = document.createElement("button");
-  button.className = "task-delete-btn";
-  button.textContent = "Delete";
+  const btnDel = document.createElement("button");
+  btnDel.className = "task-delete-btn";
+  btnDel.textContent = "Delete";
+
+  const btnDone = document.createElement("button");
+  btnDone.className = "task-complited";
+
+  if (complited) {
+    btnDone.setAttribute("data-complited", "done");
+    btnDone.textContent = "UnDone";
+  } else {
+    btnDone.setAttribute("data-complited", "unDone");
+    btnDone.textContent = "Done";
+  }
 
   li.appendChild(h2);
   li.appendChild(p);
-  li.appendChild(button);
+  li.appendChild(btnDel);
+  li.appendChild(btnDone);
 
   return li;
 }

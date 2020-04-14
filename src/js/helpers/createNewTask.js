@@ -3,6 +3,7 @@
  *
  * @param {HTMLLiElement} title
  * @param {HTMLLiElement} body
+ * @param {Boolean} complited
  * @param {Object} objOfTasks
  * @returns {Object} newTask
  */
@@ -11,9 +12,10 @@ export function createNewTask(title, body, objOfTasks) {
   const nextTaskId = getNextTaskId(objOfTasks);
 
   const newTask = {
+    _id: nextTaskId,
     title,
-    body,
-    _id: nextTaskId
+    complited: false,
+    body
   };
 
   return newTask;
@@ -33,5 +35,5 @@ function getNextTaskId(tasks) {
     .pop();
   let nextId = ++lastId;
 
-  return `tasks-${nextId}`;
+  return `task-${nextId}`;
 }
