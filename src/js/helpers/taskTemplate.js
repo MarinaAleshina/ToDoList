@@ -32,6 +32,7 @@ export function listItemTemplate({ _id, title, complited, body }) {
   if (complited) {
     btnDone.setAttribute("data-complited", "done");
     btnDone.textContent = "UnDone";
+    li.classList.add("js-complited");
   } else {
     btnDone.setAttribute("data-complited", "unDone");
     btnDone.textContent = "Done";

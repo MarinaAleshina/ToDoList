@@ -6,17 +6,17 @@
 
 export function onComplitedTask(target) {
   let attrIsDone = target.dataset.complited;
-
   const parent = target.parentElement;
 
   if (attrIsDone === "done") {
     target.setAttribute("data-complited", "unDone");
+    target.style.backgroundColor = "#353535";
     target.textContent = "Done";
-    parent.classList.add("js-complited");
-    parent.remove();
+    parent.classList.remove("js-complited");
   } else {
     target.setAttribute("data-complited", "done");
+    target.style.backgroundColor = "#776a6a";
     target.textContent = "UnDone";
-    parent.classList.remove("js-complited");
+    parent.classList.add("js-complited");
   }
 }

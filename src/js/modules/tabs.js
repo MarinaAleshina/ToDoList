@@ -1,40 +1,19 @@
-const tabs = (headerSelector, tabsSelector, contentSelector, activeClass) => {
-  const tabs = document.querySelectorAll(tabsSelector),
-    header = document.querySelector(headerSelector),
-    content = document.querySelectorAll(contentSelector);
+/**
+ *Function showTabContent. Show tab content
+ * @param {Attr} attrBtn
+ */
+export function showTabContent(attr) {
+  const tasksItem = document.querySelectorAll(".task-item");
 
-  function hideTabContent() {
-    content.forEach(item => {
-      item.style.display = "none";
-    });
+  tasksItem.forEach(el => {
+    const btnChild = el.lastElementChild;
+    const attrIsBtn = btnChild.dataset.complited;
 
-    tabs.forEach(item => {
-      item.classList.remove(activeClass);
-    });
-  }
-
-  function showTabContrnt(tab = 0) {
-    content[tab].style.display = "block";
-    tabs[tab].classList.add(activeClass);
-  }
-
-  hideTabContent();
-  showTabContrnt();
-
-  header.addEventListener("click", e => {
-    const target = e.target;
-    if (
-      target.classList.contains(tabsSelector.replace(/\./, "")) ||
-      target.parentNode.classList.contains(tabsSelector.replace(/\./, ""))
-    ) {
-      tabs.forEach((item, i) => {
-        if (target == item || target.parentNode == item) {
-          hideTabContent();
-          showTabContrnt(i);
-        }
-      });
+    if (attr === "all" && attrIsBtn === "unDone") {
+      el.classList.remove("js-hidden");
+    }
+    if (attr === "completed" && attrIsBtn !== "done") {
+      el.classList.add("js-hidden");
     }
   });
-};
-
-export default tabs;
+}

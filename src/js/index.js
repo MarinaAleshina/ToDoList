@@ -8,12 +8,19 @@ import { createNewTask } from "./helpers/createNewTask";
 import { listItemTemplate } from "./helpers/taskTemplate";
 import { setShowError, setSuccessFor } from "./views/form";
 import { onComplitedTask } from "./views/complitedTask";
-import { onModal } from "./modules/modals";
-import tabs from "./modules/tabs";
+// import { onModal } from "./modules/modals";
+import { showTabContent } from "./modules/tabs";
+import { createModal } from "./helpers/createModal";
 
-tabs(".task-btn-container", ".btn", ".task-container", "btn-active");
+const {
+  form,
+  inputTitle,
+  inputBody,
+  taskContainer,
+  taskBtnContainer,
+  tabsBtn
+} = userInterfaceElements;
 
-const { form, inputTitle, inputBody, taskContainer } = userInterfaceElements;
 const inputs = [inputTitle, inputBody];
 
 const objOfTasks = getObjectOfTasks(tasks);
@@ -28,7 +35,19 @@ inputs.forEach(input =>
   })
 );
 
-window.addEventListener("unload", e => {
+taskBtnContainer.addEventListener("click", e => {
+  const target = e.target;
+  const attrBtn = target.getAttribute("data-tab");
+
+  if (!attrBtn || target.classList.contains("btn-active")) return;
+
+  tabsBtn.forEach(el => el.classList.remove("btn-active"));
+  target.classList.add("btn-active");
+
+  showTabContent(attrBtn);
+});
+
+window.addEventListener("unload", () => {
   localStorage.setItem("tasks", JSON.stringify(objOfTasks));
 });
 
@@ -36,8 +55,6 @@ taskContainer.addEventListener("click", e => {
   const target = e.target;
   if (target.classList.contains("task-delete-btn")) onModal(target);
   if (target.classList.contains("task-complited")) onComplitedTask(target);
-  if (target.classList.contains("btn-delete-task")) deleteTaskFromHtml(target);
-  if (target.classList.contains("cancel-del-task")) onComeBackTask(target);
 });
 
 form.addEventListener("submit", onFormSubmitHandler);
@@ -63,16 +80,27 @@ function onFormSubmitHandler(e) {
   objOfTasks[newTask._id] = newTask;
 
   const li = listItemTemplate(newTask);
-
   taskContainer.insertAdjacentElement("afterbegin", li);
   form.reset();
 }
 
-function deleteTaskFromHtml(target) {
-  const parent = target.getAttribute("data-is-delete");
-  console.log(parent);
-}
+function onModal(target) {
+  const liModal = target.closest("[data-task-id]");
 
-function onComeBackTask(target) {
-  console.log(target);
+  const divModal = createModal();
+  document.body.appendChild(divModal);
+
+  divModal.addEventListener("click", onDeleteHandler);
+
+  function onDeleteHandler({ target }) {
+    if (target.classList.contains("btn-delete-task")) {
+      const attrIdOfTask = liModal.dataset.taskId;
+      delete objOfTasks[attrIdOfTask];
+      localStorage.removeItem(attrIdOfTask);
+      liModal.remove();
+      divModal.remove();
+    } else {
+      divModal.remove();
+    }
+  }
 }

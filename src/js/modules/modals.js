@@ -1,10 +1,27 @@
 import { createModal } from "../helpers/createModal";
+import tasks from "../../assets/tasks.json";
+import { getObjectOfTasks } from "../helpers/getObjectOfTasks";
 
 export function onModal(target) {
-  const li = target.closest("[data-task-id]");
+  const liModal = target.closest("[data-task-id]");
+
+  const objOfTasks = getObjectOfTasks(tasks);
+
   const divModal = createModal();
+  document.body.appendChild(divModal);
 
-  li.appendChild(divModal);
+  divModal.addEventListener("click", onDeleteHandler);
 
-  return divModal;
+  function onDeleteHandler(e) {
+    const target = e.target;
+    if (target.classList.contains("btn-delete-task")) {
+      const attrIdOfTask = liModal.dataset.taskId;
+      delete objOfTasks[attrIdOfTask];
+      localStorage.removeItem(attrIdOfTask);
+      liModal.remove();
+      divModal.remove();
+    } else {
+      divModal.remove();
+    }
+  }
 }
