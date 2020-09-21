@@ -1,3 +1,7 @@
+import userInterfaceElements from "../config/ui.config";
+
+const { inComplitedTasks } = userInterfaceElements;
+
 /**
  * Function onComplitedTask. Sets an attribute when a button is clicked
  *
@@ -19,4 +23,8 @@ export function onComplitedTask(target) {
     target.textContent = "UnDone";
     parent.classList.add("js-complited");
   }
+
+  inComplitedTasks.addEventListener("click", () => {
+    console.log(inComplitedTasks);
+  });
 }

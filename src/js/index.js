@@ -59,6 +59,12 @@ taskContainer.addEventListener("click", e => {
 
 form.addEventListener("submit", onFormSubmitHandler);
 
+/**
+ * /function onFormSubmitHandler
+ *
+ * @param {event} e
+ */
+
 function onFormSubmitHandler(e) {
   e.preventDefault();
 
@@ -84,6 +90,12 @@ function onFormSubmitHandler(e) {
   form.reset();
 }
 
+/**
+ *Function onModal Open modal window
+ *
+ * @param {HTMLButtonElement} target
+ */
+
 function onModal(target) {
   const liModal = target.closest("[data-task-id]");
 
@@ -91,6 +103,11 @@ function onModal(target) {
   document.body.appendChild(divModal);
 
   divModal.addEventListener("click", onDeleteHandler);
+
+  /**
+   * function onDeleteHandler Delete or return
+   * @param {Object}
+   */
 
   function onDeleteHandler({ target }) {
     if (target.classList.contains("btn-delete-task")) {

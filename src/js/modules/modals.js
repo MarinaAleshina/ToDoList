@@ -6,6 +6,7 @@ export function onModal(target) {
   const liModal = target.closest("[data-task-id]");
 
   const objOfTasks = getObjectOfTasks(tasks);
+  console.log(liModal);
 
   const divModal = createModal();
   document.body.appendChild(divModal);
